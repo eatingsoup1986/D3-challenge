@@ -23,11 +23,11 @@ var svg = d3
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-  // Initial Params
+// Initial variables
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
 
-// function used for updating x-scale var upon click on axis label
+// function used for updating x-scale var
 function xScale(data, chosenXAxis) {
     // create scales
     var xLinearScale = d3.scaleLinear()
@@ -40,7 +40,7 @@ function xScale(data, chosenXAxis) {
   
 }
 
-// function used for updating y-scale var upon click on axis label
+// function used for updating y-scale var
 function yScale(data, chosenYAxis) {
     // create scales
     var yLinearScale = d3.scaleLinear()
@@ -56,18 +56,18 @@ function renderXAxes(newXScale, xAxis) {
     var bottomAxis = d3.axisBottom(newXScale);
   
     xAxis.transition()
-      .duration(1000)
+      .duration(500)
       .call(bottomAxis);
   
     return xAxis;
 }
 
-// function used for updating yAxis var upon click on axis label
+// function used for updating yAxis var
 function renderYAxes(newYScale, yAxis) {
     var leftAxis = d3.axisLeft(newYScale);
   
     yAxis.transition()
-      .duration(1000)
+      .duration(500)
       .call(leftAxis);
   
     return yAxis;
@@ -78,7 +78,7 @@ function renderYAxes(newYScale, yAxis) {
 function renderXCircles(circlesGroup, newXScale, chosenXAxis) {
 
     circlesGroup.transition()
-      .duration(1000)
+      .duration(500)
       .attr("cx", d => newXScale(d[chosenXAxis]))
       .attr("dx", d => newXScale(d[chosenXAxis]));
   
@@ -88,7 +88,7 @@ function renderXCircles(circlesGroup, newXScale, chosenXAxis) {
 function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
 
     circlesGroup.transition()
-      .duration(1000)
+      .duration(500)
       .attr("cy", d => newYScale(d[chosenYAxis]))
       .attr("dy", d => newYScale(d[chosenYAxis])+5)
   
@@ -98,7 +98,7 @@ function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
 function renderXText(circlesGroup, newXScale, chosenXAxis) {
 
     circlesGroup.transition()
-      .duration(1000)
+      .duration(500)
       .attr("dx", d => newXScale(d[chosenXAxis]));
   
     return circlesGroup;
@@ -106,13 +106,13 @@ function renderXText(circlesGroup, newXScale, chosenXAxis) {
 function renderYText(circlesGroup, newYScale, chosenYAxis) {
 
     circlesGroup.transition()
-      .duration(1000)
+      .duration(500)
       .attr("dy", d => newYScale(d[chosenYAxis])+5)
   
     return circlesGroup;
 }
 
-// function used for updating circles group with new tooltip
+// function used for updating circles with new tooltip
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
     var xlabel;
@@ -164,7 +164,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
     return circlesGroup;
 }
 
-// Retrieve data from the CSV file and execute everything below
+// Retrieve data from the CSV file
 d3.csv("data/data.csv").then(function(data, err) {
     // console.log(data)
     if (err) throw err;
